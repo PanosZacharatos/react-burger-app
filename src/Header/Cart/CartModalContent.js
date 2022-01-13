@@ -1,36 +1,26 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import CartModal from './CartModal';
 import classes from './CartModalContent.module.css' ;
 import CartModalContentItem from './CartModalContentItem';
+import CartContext from '../../store/CartContextProvider';
+
 
 function CartModalContent() {
+    const ctx = useContext(CartContext);
+    const handleClose = () =>{
+        ctx.changeModalStatus();
+    };
 
-    const testForNow = [{
-        id:'b214',
-        name: 'Burger',
-        amount: 2,
-        add : ()=>{},
-        remove: ()=>{}
-    },
-    {
-        id:'b21',
-        name: 'Burger1',
-        amount: 3,
-        add : ()=>{},
-        remove: ()=>{}
-    }
-    ]
+   
 
     return (
         <CartModal>
             <ul className={classes['cart-items']}>
-                {testForNow.map(burger=><CartModalContentItem 
+                {ctx.items.map(burger=><CartModalContentItem 
                         key={burger.id}
                         name={burger.name}
                         amount={burger.amount}
-                        add={burger.add}
-                        remove={burger.remove}
-                        price={23.50}
+                        price={burger.price}
                     />)}
             </ul>
             <div className={classes.total}>
@@ -38,8 +28,8 @@ function CartModalContent() {
                 <span>{0}</span>
             </div>
             <div className={classes.actions}>
-                <button className={classes['button--alt']}>Close</button>
-                <button className={classes.button}>Order</button>
+                <button className={classes['button--alt']} onClick={handleClose} >Close</button>
+                {ctx.items.length && <button className={classes.button}>Order</button>}
             </div>
         </CartModal>
     )

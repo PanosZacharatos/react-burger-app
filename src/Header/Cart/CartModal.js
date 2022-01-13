@@ -1,10 +1,16 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import ReactDOM from 'react-dom';
 import classes from './CartModal.module.css'
+import CartContext from '../../store/CartContextProvider';
 
 const BackDrop = (props) =>{
+    const ctx = useContext(CartContext);
+    
+    const handleClickBackdrop = () =>{
+        ctx.changeModalStatus();
+    }
     return(
-        <div className={classes.backdrop}></div>
+        <div className={classes.backdrop} onClick={handleClickBackdrop}></div>
     );
     
 };
