@@ -16,7 +16,7 @@ const Header = (props) => {
       <div className={classes['main-image']}>
         <img src={mealsImage} alt='A table full of delicious food!' />
       </div>
-      {(!ctx.hideModal) &&<CartModalContent />}
+      {(ctx.items.length) && (!ctx.hideModal) &&<CartModalContent />}
     </Fragment>
   );
 };

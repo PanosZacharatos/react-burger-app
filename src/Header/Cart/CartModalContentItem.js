@@ -1,7 +1,25 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import classes from './CartModalContentItem.module.css';
+import CartContext from '../../store/CartContextProvider';
+
 
 function CartModalContentItem(props) {
+
+    const ctx = useContext(CartContext);
+    const onAdd = () =>{
+        //console.log(props.name + ' ' + props.price)
+        
+        ctx.addItem({
+            name:props.name,
+            price: props.price,
+            amount: 1
+        });
+    }
+
+    const onRemove = () =>{
+        ctx.removeItem(props.id);
+    };
+
     return (
         <li className={classes['cart-item']}>
             <div>
@@ -12,8 +30,8 @@ function CartModalContentItem(props) {
                 </div>
             </div>
             <div className={classes.actions}>
-                <button>-</button>
-                <button>+</button>
+                <button onClick={onRemove}>-</button>
+                <button onClick={onAdd}>+</button>
             </div>
         </li>
     )

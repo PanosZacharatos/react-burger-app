@@ -11,6 +11,14 @@ function CartModalContent() {
         ctx.changeModalStatus();
     };
 
+    const handleOrder = () =>{
+        //to be done 
+        console.log('Ordering...');
+    }
+
+    const totalAmount = ctx.items.reduce((prev,cur)=>{
+       return prev+(cur.amount*cur.price) 
+    },0) ; 
    
 
     return (
@@ -18,6 +26,7 @@ function CartModalContent() {
             <ul className={classes['cart-items']}>
                 {ctx.items.map(burger=><CartModalContentItem 
                         key={burger.id}
+                        id={burger.id}
                         name={burger.name}
                         amount={burger.amount}
                         price={burger.price}
@@ -25,11 +34,11 @@ function CartModalContent() {
             </ul>
             <div className={classes.total}>
                 <span>Total Amount</span>
-                <span>{0}</span>
+                <span>{`$${totalAmount.toFixed(2)}`}</span>
             </div>
             <div className={classes.actions}>
                 <button className={classes['button--alt']} onClick={handleClose} >Close</button>
-                {ctx.items.length && <button className={classes.button}>Order</button>}
+                {ctx.items.length && <button onClick={handleOrder} className={classes.button}>Order</button>}
             </div>
         </CartModal>
     )

@@ -1,10 +1,25 @@
-import React from 'react';
+import React,{useState , useContext} from 'react';
 import classes from  './MealItemsForm.module.css';
+import CartContext from '../store/CartContextProvider';
 
 function MealItemsForm(props) {
+    const ctx = useContext(CartContext);
+    const [amount,setAmount] = useState(1);
+
+    const handleChange = (e) =>{
+        setAmount(e.target.value)
+    }
 
     const submitAmountForm = (e) =>{
         e.preventDefault();
+        //console.log(props.name + ' ' + props.price + ' ' + amount );
+        ctx.addItem({
+            id:props.id,
+            name:props.name,
+            price: props.price,
+            amount: +amount
+        });
+        setAmount(1)
     };
 
     const connect= 'amount' + props.id
@@ -21,10 +36,11 @@ function MealItemsForm(props) {
                     <input 
                         id={connect}
                         type='number'
-                        min='1'
-                        max = '10'
-                        step = '1'
-                        defaultValue='1'
+                        min= {1}
+                        max = {10}
+                        step = {1}
+                        value={amount}
+                        onChange={handleChange}
                     />
                 </div>
                 <button>+</button>

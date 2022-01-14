@@ -15,7 +15,7 @@ function Cart() {
         <button className={classes.button} onClick={handleClick}>
             <span className={classes.icon}><CartIcon /></span>
             <span >Your Cart</span>
-            <span className={classes.badge}>{0}</span>
+            <span className={classes.badge}>{ctx.items.length}</span>
         </button >
     )
 }

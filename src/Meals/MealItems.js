@@ -35,6 +35,7 @@ const DUMMY_BURGER_DB = [
 
 
 function MealItems() {
+
     return (
         <section className={classes.meals}>
             <Card>
@@ -45,7 +46,6 @@ function MealItems() {
                         name={burger.name}
                         description={burger.description}
                         price ={burger.price}
-
                     />)}
                 </ul>
             </Card>
