@@ -52,10 +52,12 @@ export function CartContextProvider(props) {
 
     const removeItem = (id) =>{
         const existingIdIndex = itemsIds.indexOf(id);
+        //console.log(existingIdIndex);
+        //console.log(items)
         if(items[existingIdIndex].amount===1){
-            console.log(items)
-            setItems(prev=>prev.filter(item=>item.id!==id))
-            console.log(items)
+           setItems(prev=>prev.filter(item=>item.id !== id));
+           setItemsNames(prev=>prev.filter(name=>items[existingIdIndex].name!==name))
+           setItemsIds(prev=>prev.filter(ids=>ids!==id));
         }
         else{
             setItems((prev)=>{
@@ -72,7 +74,7 @@ export function CartContextProvider(props) {
             changeModalStatus: changeModalStatus,
             items : items,
             addItem : addItem ,
-            removeItem : removeItem
+            removeItem : removeItem,
         }}>
             {props.children}
         </CartContext.Provider>
